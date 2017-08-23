@@ -1,0 +1,367 @@
+GIT
+Version control system(VCS)/revision control system(RCS)
+
+A version control system (also known as a Revision Control System) is a repository of files, often the files for the source code of computer programs, with monitored access. Every change made to the source is tracked, along with who made the change, why they made it, and references to problems fixed, or enhancements introduced, by the change.
+
+Primary objective: track changes to files
+Secondary objective : enable collaboration of files and sharing
+
+Why VCS or RCS is useful:
+
+* Several versions(track changes to files)
+* extra info along with versions
+* Enable collaboration of files
+* Accidental deletion of files can be recovered
+
+
+basic terminology :
+
+repoistory/depots - files and directories
+objects - files and dir
+add file and commit (check-in) ( check-out)
+revision/version  - changeset
+clone - server -> repo client -> clone
+revisions and changesets
+
+Types of version control systems:
+
+centralised version control: cvs, svn, clearcase, perforce  
+Distributed version control : git, mercurial, atlassian stash 
+
+
+server : gitlab - git server (apple, intel) client - git client(cmd, totrtoise gui)  github, atlassian stash, 
+		 svn collabnet edge - svn server , apache svn client ( cmd, tortoise svn client)
+
+
+http://guides.beanstalkapp.com/version-control/intro-to-version-control.html
+***************************************************
+
+Basic Course Contents
+
+1.       Introduction - Discover Git
+2.       Setting Up a Repository
+3.       Saving Changes
+4.       Inspecting a Repository
+5.       Viewing Old commits
+6.       Staging & Remotes
+7.       Cloning & Branching
+8.       Branching
+9.       Rebase belong to us
+10.   History & Configuration
+
+ Collaborating
+11.   Syncing
+12.   Making a Pull Request 
+13.   Using Branches
+14.   Comparing Workflows
+ 
+Advanced Techniques
+ 
+15.   Advanced Git Tutorials
+16.   Stashing
+17.   Merging vs Rebasing
+18.   Interactive Rebase
+19.   Reset, checkout and Revert
+20.   Advanced Git log
+21.   Git Hooks
+22.   Refs and Reflog
+23.   Purging History
+ Mastering Github
+ 
+24.   Fork Based Workflows
+25.   Single Repository Workflows
+26.   Tags, Branches & Releases
+27.   Issues, Wiki's & Github pages
+28.   Managing & Securing Github
+29.   Automating Github
+30.   Command Line Github
+ 
+Migrating to Git(just give the overview)
+ 
+31.   Migrate to GIT from SVN
+32.   Prepare
+33.   Convert
+34.   Synchronize
+35.   Share
+36.   Migrate
+
+****************************************************
+
+Git : git is a distributed version control system
+Adv of git : 
+Disadv of git : 
+
+Basic terminology : 
+
+1.object
+2.commit/check-in
+3.staging area ( working copy)
+4.working tree
+5.repository
+6.revision/version/commit ID
+7.clone  server -> client clone  -> push 
+8.pull
+9.push
+10.merge
+11.conflict
+12.branches,tags
+
+
+**********************
+Git commit workflow:
+**********************
+										 add files				commit
+how git commit happens: working tree/copy   -->   staging area   -->   repository
+													index
+git add <filenames>
+git commit -m "message"
+
+
+diff states : tracked, staged, untracked, modified
+
+
+HEAD --> top revision in a repo
+master --> defalut branch
+
+
+1 2 3 4 5... --> svn revision numbers 
+213aias 123123dsf 213213sfd 1234324 dfwer23 --> git revision numbers
+
+HEAD	HEAD^1		HEAD^^
+		HEAD~1		HEAD~~ HEAD~2 HEAD~3
+		
+		
+^ (caret) and ~ (tilde) in git: 
+.. operator
+
+git log HEAD~4..HEAD
+
+git log branch1..master
+
+--> in git we can not add empty directories
+
+-----------------------------
+
+bare vs non bare repository : 
+
+-----------------------------
+
+git repository-layout:
+
+hooks: custom scripts to perform some action on the repo
+
+    prepare-commit-msg – Provide a default commit message if one is not given.
+    commit-msg – Commit message validation.
+	pre-commit - Runs before a commit
+    post-commit – Runs after a successful commit.
+    pre-push – Runs before git push after the remote is verified to be working. It takes 2 arguments: the name of the remote, and the URL to it.
+    pre-rebase – Runs before git rebase.
+    post-checkout – Runs after a successful checkout.
+    post-merge – Runs after a successful merge.
+
+info : additional info : for example per repo exclude files (.git/info/exclude)
+objects :  data of your Git objects is stored (files and directories and their version)
+refs : stores tip of the branch. tip of remote branch
+	A refspec maps a branch in the local repository to a branch in a remote repository.
+config : Repository specific configuration file.
+description : 
+ 
+HEAD : tip of the branch and there is one "default" branch of the repository (usually master)
+
+-----------------------------
+Git configuration :
+system wise config/ user level config / repo level config
+git config --list
+git config --global user.name "username"
+git config --global user.email "email"
+git config --global push.default simple / pull(fetch + merge) --> git fetch <url> + git merge <src>
+-----------------------------
+use "git checkout -- <file>..." to discard changes in working directory
+	
+git checkout will delete the unstaged and uncommited changes in the working tree.
+git commit --amend
+----------------------------
+git log
+diff between two commits
+git diff HEAD~1 HEAD , git diff between 2 brnaches
+git show <commit id> - to see the changes that were introduced in a commit
+git blame - who has introduced each line in a file
+----------------------------
+Ignore files and directories: .gitignore and commmit the file
+remove all untracked files : git clean -fx
+git reset : to remove staged changes from the staging area(git reset --hard)
+git reset HEAD~1
+to undo git reset --hard HEAD@{1}
+git reflog
+git revert : to withdraw commits
+-----------------------------
+Remote repositories :
+
+Remotes are URLs in a Git repository to other remote repositories that are hosted on the Internet, locally or on the network.
+Such remotes can be used to synchronize the changes of several Git repositories. A local Git repository can be connected to multiple remote repositories and you can synchronize your local repository with them via Git operations. 
+
+a term called origin: it is a remote that points back to the cloned repository
+git push & git pull(fetch and merge)
+----------------------------
+Branches : branches are used to develop different features in parallel and isolated from one another. (to maintain different versions of source code)
+master is the default branch in git.
+create : git branch [branchname]
+list branch : git barnch -a/-r
+work on the branch : git chekout branchname 
+rename a branch : git branch -m <old branch name> <new branch name>
+delete a branch : git branch -d/-D <branch name>
+					git push origin :<branch name>
+----------------------------
+Tags : a tag is pointer to a commit in the repository history so that you find it easier at a later point in time -> to uniqely/easily identify releases
+create a tag : git tag <tag name> <commit id> or git tag -a <tagname> -m "message"
+push tags : git push --tags
+delete a tag : git tag -d <tag name>
+				git push origin :refs/tags/<tag name>
+----------------------------
+git cherry-pick: picking commits from one branch and commit them on to another branch
+dd2e86 - 946992 - 9143a9 - a6fd86 - 5a6057 [master]
+           \
+            76cada - 62ecb3 - b886a0 [feature]
+
+----------------------------
+git stash : allows you to record the current state of the working directory and the staging area and to revert to the last committed revision. 
+commands : git stash list , git stash apply,  git stash pop , git stash drop, git stash clear
+
+----------------------------
+git create a patch : patches on one branch and commit patch another branch
+git format-patch HEAD~1		
+	
+git diff --cached > mypatch.patch
+git apply mypatch.patch
+-----------------------------
+git submodule :similar to svn external
+
+Nesting of repositories : 
+----------------------------
+git merge : merging is combining changes of two different branches. Fast forward merge vs non fast forward merge
+https://sandofsky.com/images/fast_forward.pdf
+
+git rebase <rel1>
+
+ rebase: will not create a merge commit 
+https://www.git-tower.com/learn/git/ebook/en/command-line/advanced-topics/rebase
+http://code.tutsplus.com/tutorials/rewriting-history-with-git-rebase--cms-23191
+------------------------------
+git squashing : freeze one or more commits into one single commit
+------------------------------
+git branching strategy :  no of different branches, type of branches
+
+types of branches : master,feature,develop,release,hotfix/bugfix
+
+sequential branching : master branch is the only branch where all the dev takes place -> product - single rel in an year 
+
+parallel branching : master branch not dev branch - keeping a stable code always
+													rel and feature branches are used for dev -> stable    -> product -> multiplease ios8 ios7 ios9 
+
+release1 - 1.0  -> build -> release output
+release2 - 2.0
+
+
+Example : 
+
+jan 2015 internet banking -> release -> seq -> master -> release internet banking customers
+end dec -> release  
+3 features -> 2016
+
+mobile banking             Jan1 rel1------------------------------- Jun30
+
+credit card banking					Mar1 rel2 --------------------------------Aug 30
+
+demat banking								May1 rel3 ---------------------------------Oct30
+
+master -> internet banking   		prod server- internet banking
+		   internet banking	+ mobile 		   - internet banking + mobile 
+												- internet banking  + credit banking + mobile
+												- internet banking  + demat + credit banking + mobile 
+		internet+ mobile						internet + mobile -> rel1
+		internet + mobile  + credit								internet banking  + credit banking + mobile
+		internet  + demat + mobile + credit 									internet  + demat + mobile + credit
+											
+master -> no data overwrite/ no production loss - before deployment
+	  ->  rel code ~ master code - after deployment
+
+
+internet banking -> master
+						  rel1 -> internet banking + mobile banking -> remove all the ->
+						  rel2 -> internet banking  + credit banking + mobile 
+						  rel3 -> internet  + demat + credit banking + mobile 
+
+						  
+						  
+						  
+
+git checkout master & git merge  rel1
+				  
+git checkiout rel2 & git merge master			
+
+git checkout master & git merge rel2
+
+git checkout rel3 & git merge master 
+
+git checkout master & git merge rel3
+
+
+
+
+master + rel1 + rel2 + rel3 -> master - stable 
+
+master -> stable
+rel1 -> 
+dev_rel1 -> 
+
+rel2 ->
+dev_rel2 -> 
+
+rel3 ->
+dev_rel3 -> 
+
+
+devA -> group -> repos
+devB 
+devC
+
+
+main repo <- fork_main ( remote -> git poush )
+git fork -> creating copy repo on the server -> fork_main repo -> 
+
+
+
+repo1 -> fork -> dup_repo1 -> dev 
+
+
+
+
+git clone dup_repo1
+git commit 
+git commit 
+
+git remote -v
+git remote add n1 repo1 url
+git push n1
+
+dev 10 -> 10 forks 
+
+repo1 -> fork 
+
+user1 -> fork -> dup1_repo1
+user2 -> fork -> dup2_repo2
+
+
+						  
+
+						  
+
+
+
+						  
+		
+
+
+
+
+

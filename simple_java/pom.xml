@@ -18,8 +18,8 @@
   </distributionManagement>
   
      <scm>
-        <connection>scm:git:https://github.com/LaxminarasimharaoG/mavenfirst.git</connection>
-        <developerConnection>scm:git:https://github.com/LaxminarasimharaoG/mavenfirst.git</developerConnection>
+        <connection>scm:git:https://gitlab.com/ramuguttikonda/mavenfirst.git</connection>
+        <developerConnection>scm:git:https://gitlab.com/ramuguttikonda/mavenfirst.git</developerConnection>
       <tag>HEAD</tag>
   </scm>
     	<build>
